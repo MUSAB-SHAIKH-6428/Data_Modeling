@@ -2,7 +2,7 @@ CREATE DATABASE gym_management;
 
 CREATE TABLE members (
     member_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    member_name VARCHAR(100) NOT NULL,
     gender VARCHAR(10),
     phone VARCHAR(15) UNIQUE,
     email VARCHAR(100) UNIQUE,
@@ -12,7 +12,7 @@ CREATE TABLE members (
 
 CREATE TABLE membership_plan (
     membership_plan_id SERIAL PRIMARY KEY,
-    type VARCHAR(50) NOT NULL,
+    membership_type VARCHAR(50) NOT NULL,
     time_period INTEGER NOT NULL,
     price DECIMAL(10,2) NOT NULL
 );
@@ -21,7 +21,7 @@ CREATE TABLE membership (
     membership_id SERIAL PRIMARY KEY,
     member_id INT NOT NULL,
     membership_plan_id INT NOT NULL,
-    start_date DATE NOT NULL,
+    joined_date DATE NOT NULL,
     end_date DATE NOT NULL,
     is_active BOOLEAN DEFAULT TRUE,
 
@@ -39,7 +39,7 @@ CREATE TABLE payment (
     membership_id INT UNIQUE NOT NULL,
     payment_date DATE NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
-    status VARCHAR(20),
+    fee_status VARCHAR(20),
     mode VARCHAR(20),
 
     CONSTRAINT fk_membership
@@ -49,7 +49,7 @@ CREATE TABLE payment (
 
 CREATE TABLE centre (
     centre_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    centre_name VARCHAR(100) NOT NULL,
     branch_name VARCHAR(100),
     city VARCHAR(50),
     intake_capacity INT
@@ -124,7 +124,7 @@ CREATE TABLE class_attendance (
 
 ALTER TABLE membership
 ADD CONSTRAINT chk_membership_dates
-CHECK (end_date > start_date);
+CHECK (end_date > joined_date);
 
 ALTER TABLE membership_plan
 ADD CONSTRAINT chk_price

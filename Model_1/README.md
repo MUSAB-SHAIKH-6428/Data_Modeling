@@ -52,7 +52,7 @@ The physical database model consists of 9 core tables:
 ---
 
 ## Key Business Queries
-All analytical queries answering key business questions have been moved to [`scripts.sql`](scripts.sql). 
+All analytical queries answering key business questions are in -> [`scripts.sql`](scripts.sql). 
 
 ### Key Queries Included in `scripts.sql`:
 1. **Approaching Expirations**: Identifies active memberships expiring within the next 30 days.
