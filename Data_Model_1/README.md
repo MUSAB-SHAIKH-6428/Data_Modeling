@@ -3,7 +3,6 @@
 ## Problem Statement
 Design a relational database schema for a fitness gym chain operating multiple locations. The schema manages members, membership tiers, active subscriptions, payments, multi-location centres, trainers, class schedules, and member class attendance.
 
----
 
 ## Business Context
 Gym chains need to track membership tiers, recurring payments, and class participation to monitor member engagement and predict churn. 
@@ -15,7 +14,6 @@ Gym chains need to track membership tiers, recurring payments, and class partici
 4. **Monthly Churn Rate**: What percentage of memberships expire without renewal each month?
 5. **Inactive Members (30+ Days)**: Which members haven't attended any classes in the last 30+ days?
 
----
 
 ## Requirements & Constraints
 * **Multi-Plan Management**: Support membership plans with distinct durations and pricing models.
@@ -25,13 +23,9 @@ Gym chains need to track membership tiers, recurring payments, and class partici
 * **Churn & Expiration Detection**: High-performance indexed queries for daily automated alerts.
 * **Scale**: Built to handle 50,000+ active members, 100+ weekly classes across 20 locations, and 1+ years of historical attendance logs.
 
----
-
 ## Entity Relationship Diagram (Data Model)
 
 ![Data Model](DATA_MODEL.png)
-
----
 
 ## Schema Architecture
 
@@ -49,8 +43,6 @@ The physical database model consists of 9 core tables:
 | **`class_schedule`** | Scheduled sessions across locations | `class_schedule_id`, `schedule_date`, `schedule_time`, `capacity`, `trainer_id`, `classes_id`, `centre_id` |
 | **`class_attendance`** | Attendance logs per scheduled class | `classattendance_id`, `attendance_date`, `class_schedule_id`, `member_id`, `is_present` |
 
----
-
 ## Key Business Queries
 All analytical queries answering key business questions are in -> [`scripts.sql`](scripts.sql). 
 
@@ -60,12 +52,3 @@ All analytical queries answering key business questions are in -> [`scripts.sql`
 3. **Class Popularity**: Ranks fitness classes by total confirmed attendance (`is_present = TRUE`).
 4. **Monthly Churn Rate**: Calculates the percentage of non-renewed memberships per month.
 5. **Inactive Members (30+ Days)**: Flags active members who haven't logged attendance in over 30 days.
-
----
-
-## Indexes & Performance Optimization
-To support daily analytical queries across 50,000+ members and millions of attendance records, the following index strategy is implemented in `Physical_Data_Model.sql`:
-
-- `idx_membership_member` & `idx_membership_enddate`: Optimized for subscription status and expiration queries.
-- `idx_attendance_member` & `idx_attendance_date`: Fast lookup for churn detection and activity logs.
-- `idx_schedule_centre` & `idx_schedule_class`: Accelerates location and class-level reporting.

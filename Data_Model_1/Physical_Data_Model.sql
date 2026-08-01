@@ -75,17 +75,11 @@ CREATE TABLE classes (
 
 CREATE TABLE class_schedule (
     class_schedule_id SERIAL PRIMARY KEY,
-
     schedule_date DATE NOT NULL,
-
     schedule_time TIME NOT NULL,
-
     capacity INT NOT NULL,
-
     trainer_id INT NOT NULL,
-
     classes_id INT NOT NULL,
-
     centre_id INT NOT NULL,
 
     CONSTRAINT fk_schedule_trainer
@@ -102,15 +96,10 @@ CREATE TABLE class_schedule (
 );
 
 CREATE TABLE class_attendance (
-
     classattendance_id SERIAL PRIMARY KEY,
-
     attendance_date DATE NOT NULL,
-
     class_schedule_id INT NOT NULL,
-
     member_id INT NOT NULL,
-
     is_present BOOLEAN DEFAULT FALSE,
 
     CONSTRAINT fk_attendance_schedule
