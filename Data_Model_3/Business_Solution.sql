@@ -57,9 +57,9 @@ SELECT
     shp.phone,
     sl.latitude AS shopper_lat,
     sl.longitude AS shopper_lng,
-    ( 6371 * acos( cos( radians(st.latitude) ) * cos( radians( sl.latitude ) ) 
+    ( 6371 * acos( cos( radians(st.latitude) ) * cos( radians( sl.latitude )) 
     * cos( radians( sl.longitude ) - radians(st.longitude) ) 
-    + sin( radians(st.latitude) ) * sin( radians( sl.latitude ) ) ) ) AS distance_km
+    + sin( radians(st.latitude) ) * sin( radians( sl.latitude )))) AS distance_km
 FROM shopper shp
 JOIN shopper_location sl ON shp.shopper_id = sl.shopper_id
 CROSS JOIN store st
