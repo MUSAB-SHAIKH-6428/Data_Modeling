@@ -6,6 +6,8 @@ on pv.product_variant_id= i.product_variant_id
 GROUP BY p.product_id, p.product_name
 order by p.product_id, total_quantity desc;
 
+
+
 select c.customer_name, o.order_id, o.Ordered_At, s.Shipment_Status from customer c
 join orders o
 on c.customer_id = o.customer_id
@@ -14,6 +16,7 @@ on o.order_id = s.order_id
 where c.customer_name = 'Rahul Sharma'
 order by o.Ordered_At desc
 
+	
 
 with CTE as(
 select p.Product_Name, 
@@ -36,6 +39,8 @@ on i.warehouse_id = w.warehouse_id
 select * from cte
 where status is not null;
 
+
+
 select pc.category_name, sum(o.Price * Quantity) as Revenue from product_category pc
 join product p
 on pc.category_id = p.category_id
@@ -46,6 +51,8 @@ on pv.product_variant_id = o.product_variant_id
 group by pc.category_name
 order by revenue desc
 
+
+	
 SELECT
     o.order_id,
     w.warehouse_name,
