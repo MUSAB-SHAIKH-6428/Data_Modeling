@@ -1,5 +1,6 @@
 -- Real-Time Store Inventory Query
 -- Checks current available stock for products at a specific store location
+
 SELECT 
     s.store_name,
     p.name AS product_name,
@@ -19,6 +20,7 @@ ORDER BY p.name;
 
 -- Store-Specific Catalog and Pricing Lookup
 -- Allows customers to search products and compare store-specific pricing
+
 SELECT 
     p.name AS product_name,
     pv.sku,
@@ -35,6 +37,7 @@ ORDER BY p.name, sc.price ASC;
 
 -- Load Saved Shopping List with Current Store Pricing
 -- Retrieves items from customer's saved list with active prices at the selected store
+
 SELECT 
     sl.shopping_list_name,
     p.name AS product_name,
@@ -51,6 +54,7 @@ WHERE sl.customer_id = 10 AND sc.store_id = 2;
 
 -- Shopper Assignment Query Based on Proximity
 -- Finds nearest available shoppers to a store using distance calculation
+
 SELECT 
     shp.shopper_id,
     shp.name AS shopper_name,
