@@ -3,7 +3,9 @@ CREATE TABLE guest (
     name VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20),
     is_active BOOLEAN DEFAULT TRUE,
-    email_id VARCHAR(255) UNIQUE NOT NULL
+    email_id VARCHAR(255) UNIQUE NOT NULL,
+    gender VARCHAR(20),
+    joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE property (
@@ -46,10 +48,11 @@ CREATE TABLE booking (
     booking_id BIGSERIAL PRIMARY KEY,
     room_type_id BIGINT NOT NULL REFERENCES room_type(room_type_id),
     property_id BIGINT NOT NULL REFERENCES property(property_id),
+    guest_id BIGINT NOT NULL REFERENCES guest(guest_id),
     status VARCHAR(30) NOT NULL,
     check_in DATE NOT NULL,
-    guest_id BIGINT NOT NULL REFERENCES guest(guest_id),
     check_out DATE NOT NULL,
+    booking_amount NUMERIC(12,2) DEFAULT 0.00,
     CHECK (check_out > check_in)
 );
 
