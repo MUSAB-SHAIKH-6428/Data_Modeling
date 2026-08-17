@@ -131,3 +131,16 @@ CREATE TABLE substitution (
     approved_at TIMESTAMP,
     substituted_product_variant_id BIGINT REFERENCES product_variant(product_variant_id)
 );
+
+CREATE INDEX idx_product_variant_product ON product_variant(product_id);
+CREATE INDEX idx_shopper_location_shopper ON shopper_location(shopper_id);
+CREATE INDEX idx_shopping_list_customer ON shopping_list(customer_id);
+CREATE INDEX idx_shopping_list_item_list ON shopping_list_item(shopping_list_id);
+CREATE INDEX idx_orders_customer ON orders(customer_id);
+CREATE INDEX idx_orders_store ON orders(store_id);
+CREATE INDEX idx_orders_shopper ON orders(shopper_id);
+CREATE INDEX idx_order_item_order ON order_item(order_id);
+CREATE INDEX idx_order_item_variant ON order_item(product_variant_id);
+CREATE INDEX idx_substitution_order_item ON substitution(order_item_id);
+CREATE INDEX idx_substitution_customer ON substitution(customer_id);
+CREATE INDEX idx_substitution_status ON substitution(substituted_status);

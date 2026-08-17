@@ -12,7 +12,7 @@ Relational database schema for an online learning platform (such as Coursera or 
 ![Entity Relationship Diagram](Entity_Relationship_Diagram.png)
 
 > [!NOTE]
-> The physical SQL schema was updated after creating the initial ERD to include descriptive naming columns (such as `module_name` in `module` and `lesson_name` in `lesson`) to fully support direct business reporting and query requirements.
+> The physical SQL schema was updated after creating the initial ERD to include descriptive naming columns (`module_name`, `lesson_name`), granular progress timestamps (`started_at`, `completed_at`, `last_watched_at`), and unique certificate verification codes (`certificate_code`) to support reporting and credential validation.
 
 ## Schema Architecture
 
@@ -25,10 +25,10 @@ The database model consists of 9 core tables:
 | **`module`** | Course module divisions | `module_id`, `course_id`, `module_name` |
 | **`lesson`** | Individual learning units within modules | `lesson_id`, `module_id`, `lesson_name` |
 | **`enrollment`** | Student course registration and lifecycle status | `enrollment_id`, `student_id`, `course_id`, `stage`, `enrolled_at`, `completed_at` |
-| **`progress`** | Lesson-level progress and completion tracking | `progress_id`, `student_id`, `lesson_id`, `status` |
+| **`progress`** | Lesson-level progress and granular engagement tracking | `progress_id`, `student_id`, `lesson_id`, `status`, `started_at`, `completed_at`, `last_watched_at` |
 | **`assignment`** | Course assessment and assignment definitions | `assignment_id`, `course_id`, `assignment_name` |
 | **`grade`** | Student evaluation marks and score records | `grade_id`, `assignment_id`, `student_id`, `grade` |
-| **`certificate`** | Official course completion credentials | `certificate_id`, `student_id`, `course_id`, `issued_at` |
+| **`certificate`** | Official course completion credentials & verification | `certificate_id`, `certificate_code`, `student_id`, `course_id`, `issued_at` |
 
 ## Key Business Queries
 All SQL solutions are in [`Business_Solution.sql`](Business_Solution.sql):

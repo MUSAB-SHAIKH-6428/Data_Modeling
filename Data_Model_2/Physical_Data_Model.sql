@@ -173,3 +173,18 @@ CREATE TABLE shipment (
         FOREIGN KEY(order_id)
         REFERENCES orders(order_id)
 );
+
+CREATE INDEX idx_customer_address_customer ON customer_address(customer_id);
+CREATE INDEX idx_product_category ON product(category_id);
+CREATE INDEX idx_product_variant_product ON product_variant(product_id);
+CREATE INDEX idx_inventory_warehouse ON inventory(warehouse_id);
+CREATE INDEX idx_inventory_variant ON inventory(product_variant_id);
+CREATE INDEX idx_orders_customer ON orders(customer_id);
+CREATE INDEX idx_orders_address ON orders(ca_id);
+CREATE INDEX idx_order_item_order ON order_item(order_id);
+CREATE INDEX idx_order_item_variant ON order_item(product_variant_id);
+CREATE INDEX idx_payment_order ON payment(order_id);
+CREATE INDEX idx_payment_attempt_payment ON payment_attempt(payment_id);
+CREATE INDEX idx_shipment_order ON shipment(order_id);
+CREATE INDEX idx_shipment_carrier ON shipment(carrier_id);
+CREATE INDEX idx_shipment_warehouse ON shipment(warehouse_id);

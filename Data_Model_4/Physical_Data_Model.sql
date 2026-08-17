@@ -65,3 +65,12 @@ CREATE TABLE review (
     rater VARCHAR(20) NOT NULL CHECK (rater IN ('GUEST', 'HOST')),
     given_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX idx_room_type_property ON room_type(property_id);
+CREATE INDEX idx_pricing_rule_room_type ON pricing_rule(room_type_id);
+CREATE INDEX idx_booking_property_status ON booking(property_id, status);
+CREATE INDEX idx_booking_guest ON booking(guest_id);
+CREATE INDEX idx_booking_room_type_dates ON booking(room_type_id, check_in, check_out);
+CREATE INDEX idx_review_property ON review(property_id);
+CREATE INDEX idx_review_guest ON review(guest_id);
+CREATE INDEX idx_review_booking ON review(booking_id);
