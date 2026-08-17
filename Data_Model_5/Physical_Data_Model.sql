@@ -69,6 +69,9 @@ create table progress (
     student_id bigint not null,
     lesson_id bigint not null,
     status varchar(30) not null,
+    started_at timestamp not null default current_timestamp,
+    completed_at timestamp,
+    last_watched_at timestamp default current_timestamp,
 
     constraint fk_progress_student
         foreign key (student_id)
@@ -89,6 +92,12 @@ create table progress (
                 'COMPLETED',
                 'DROPPED'
             )
+        ),
+
+    constraint chk_progress_completion_date
+        check (
+            completed_at is null
+            or completed_at >= started_at
         )
 );
 
@@ -125,6 +134,7 @@ create table grade (
 
 create table certificate (
     certificate_id bigserial primary key,
+    certificate_code varchar(64) unique not null,
     student_id bigint not null,
     course_id bigint not null,
     issued_at timestamp not null default current_timestamp,
@@ -140,3 +150,14 @@ create table certificate (
     constraint uq_student_course_certificate
         unique (student_id, course_id)
 );
+
+create index idx_module_course on module(course_id);
+create index idx_lesson_module on lesson(module_id);
+create index idx_enrollment_course_stage on enrollment(course_id, stage);
+create index idx_progress_lesson_status on progress(lesson_id, status);
+create index idx_progress_student_status on progress(student_id, status);
+create index idx_assignment_course on assignment(course_id);
+create index idx_grade_assignment on grade(assignment_id);
+create index idx_grade_student on grade(student_id);
+create index idx_certificate_student on certificate(student_id);
+create index idx_certificate_course on certificate(course_id);
