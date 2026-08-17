@@ -1,3 +1,5 @@
+-- Change the schema acc to req we have seen
+
 CREATE TABLE student (
     student_id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
